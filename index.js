@@ -154,7 +154,8 @@ app.post('/add-user',async(req,resp)=>{
 
 app.get('/user',async(req,resp)=>{
     let result=await User.find().select('-password');
-    return resp.status(200).json(result)
+    resp.end()
+    // return resp.status(200).json(result)
 })
 
 app.delete('/user/:id',async(req,resp)=>{
