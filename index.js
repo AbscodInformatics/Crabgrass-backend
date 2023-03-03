@@ -152,6 +152,9 @@ app.use(express.json());
 //     let result=user.save();
 //     return resp.status(200).json(user);
 // })
+app.get('/demo',async(re,resp)=>{
+    await resp.send('api working')
+})
 
 app.get('/user',async(req,resp)=>{
    try{
