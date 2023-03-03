@@ -31,7 +31,7 @@ app.post('/signin',async(req,resp)=>{
 app.post('/add-product',async(req,resp)=>{
     let product=new Products(req.body);
     let result=await product.save();
-    resp.status(200).json(product);
+    resp.status(200).json(result);
 });
 
 app.get('/products',async(req,resp)=>{
@@ -85,14 +85,14 @@ app.get('/sale/:id',async(req,resp)=>{
     resp.status(200).json(result)
 })
 
-app.put('/sale/:id',async(req,ressp)=>{
+app.put('/sale/:id',async(req,resp)=>{
     let result =await Sales.updateOne(
         {_id:req.params.id},
         {
             $set:req.body
         }
     )
-    res
+    resp.status(200).json(result)
 })
 //Purchase API
 
