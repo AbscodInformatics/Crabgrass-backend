@@ -21,12 +21,12 @@ app.post('/signin',async(req,resp)=>{
   if(req.body.email && req.body.password){
     let user=await User.findOne(req.body).select('-password');
     if(user){
-        return resp.send(user);
+        return resp.send({sucess:true,data:user,msg:"Suceess true"});
     }else{
-        return resp.send({result:"failed"})
+        return resp.send({sucess:false,data:null,msg:'Some thing went wrong'})
     }
   }else{
-    return resp.send({result:'enter both field'})
+    return resp.send({sucess:false,data:null,msg:'enter both field'})
   }
 });
 
