@@ -113,6 +113,27 @@ app.get('/purchase',async(req,resp)=>{
     return resp.status(200).json(result);
 })
 
+app.delete('/purchase/:id',async(req,resp)=>{
+  let result =await Purchases.deleteOne({_id:req.params.id})
+  resp.status(200).json(result)
+})
+
+
+app.get('/purchase/:id',async(req,resp)=>{
+    let result=await Purchases.findOne({_id:req.params.id})
+    resp.status(200).json(result)
+})
+
+app.put('/purchase/:id',async(req,resp)=>{
+    let result=await Purchases.updateOne(
+        {_id:req.params.id},
+        {
+            $set:req.body
+        }
+    )
+    resp.status(200).json({status:true,data:result})
+})
+
 //Returns API
 
 app.post('/add-return',async(req,resp)=>{
@@ -128,6 +149,27 @@ app.post('/add-return',async(req,resp)=>{
 app.get('/return',async(req,resp)=>{
     let result=await Returns.find();
     return resp.status(200).json(result) 
+})
+
+
+app.delete('/return/:id',async(req,resp)=>{
+    let result = await Returns.deleteOne({_id:req.params.id})
+    resp.status(200).json(result)
+})
+
+app.get('/return/:id',async(req,resp)=>{
+    let result=await Returns.findOne({_id:req.params.id})
+    resp.status(200).json(result)
+})
+
+app.put('/return/:id',async(req,resp)=>{
+    let result=await Returns.updateOne(
+        {_id:req.params.id},
+        {
+            $set:req.body
+        }
+    )
+    resp.status(200).json({status:true,data:result})
 })
 
 //Salesman API
@@ -156,9 +198,7 @@ app.post('/add-user',async(req,resp)=>{
     let result=user.save();
     return resp.status(200).json(user);
 })
-app.get('/demo',async(re,resp)=>{
-    await resp.send('api working')
-})
+
 
 app.get('/user',async(req,resp)=>{
    try{
@@ -175,6 +215,21 @@ app.get('/user',async(req,resp)=>{
 app.delete('/user/:id',async(req,resp)=>{
     let result=await User.deleteOne({_id:req.params.id})
     return resp.status(200).json(result)
+})
+
+app.get('/user/:id',async(req,resp)=>{
+    let result =await User.findOne({_id:req.params.id})
+    resp.status(200).json(result)
+})
+
+app.put('/user/:id',async(req,resp)=>{
+    let result=await User.updateOne(
+        {_id:req.params.id},
+        {
+            $set:req.body
+        }
+    )
+    resp.status(200).json(result)
 })
 
 app.listen(4000,()=>console.log("Run on port 4000"));
